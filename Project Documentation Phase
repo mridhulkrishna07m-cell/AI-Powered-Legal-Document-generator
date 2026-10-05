@@ -1,1 +1,661 @@
 Project Documentation Phase
+LegalEase: AI-Powered Legal Document Generator
+
+Project Documentation Phase
+
+1. Introduction
+
+The Project Documentation Phase is the stage where all information related to the LegalEase project is organized and presented in a clear and systematic manner.
+
+Documentation explains the purpose, requirements, design, development, testing, results, limitations, and future scope of the project. It also provides a reference for users, developers, teachers, and evaluators.
+
+LegalEase is an AI-powered web application designed to help users create AI-assisted legal document drafts by entering required information and selecting a suitable document type.
+
+> LegalEase is a drafting-assistance system. Its generated content should be reviewed and does not replace professional legal advice.
+
+
+
+
+---
+
+2. Objectives of Documentation
+
+The main objectives are:
+
+Explain the complete project clearly.
+
+Record the project requirements.
+
+Describe the system architecture and design.
+
+Document the technologies used.
+
+Explain the development process.
+
+Record testing procedures and results.
+
+Provide instructions for using the application.
+
+Document limitations and future enhancements.
+
+Provide a reference for future developers.
+
+
+
+---
+
+3. Project Documentation Structure
+
+The final project report can be organized as follows:
+
+1. Title Page
+2. Certificate
+3. Declaration
+4. Acknowledgement
+5. Abstract
+6. Table of Contents
+7. Introduction
+8. Problem Statement
+9. Objectives
+10. Existing System
+11. Proposed System
+12. Requirement Analysis
+13. System Design
+14. Project Development
+15. AI Integration
+16. Testing
+17. Results
+18. Advantages
+19. Limitations
+20. Future Scope
+21. Conclusion
+22. References
+23. Appendix
+
+
+---
+
+4. Title Page
+
+The title page should contain:
+
+PROJECT TITLE
+
+LegalEase: AI-Powered Legal Document Generator
+
+Additional details can include:
+
+Student name
+
+Register number
+
+Course
+
+Department
+
+College name
+
+Academic year
+
+Project guide
+
+Institution logo
+
+
+
+---
+
+5. Abstract
+
+Abstract
+
+LegalEase is an AI-powered web application designed to simplify the process of preparing basic legal document drafts. Traditional document preparation can be time-consuming and difficult for users who are unfamiliar with legal terminology and document structures.
+
+The proposed system allows users to select a document type and enter relevant information through a simple interface. The application processes the information using an AI service and generates a structured document draft. Users can preview, edit, regenerate, and download the generated document.
+
+The system combines web technologies, backend processing, artificial intelligence, and document generation to provide a convenient drafting assistant. Appropriate disclaimers and user-review steps are included because AI-generated content may require verification and does not constitute professional legal advice.
+
+
+---
+
+6. Problem Statement
+
+Preparing legal documents manually can be difficult because users may:
+
+Not know the correct document format.
+
+Find legal terminology difficult to understand.
+
+Spend considerable time preparing documents.
+
+Make formatting or information errors.
+
+Have difficulty finding suitable templates.
+
+
+LegalEase addresses these challenges by providing an AI-assisted document-drafting workflow.
+
+
+---
+
+7. Objectives
+
+The project objectives are:
+
+1. Develop a user-friendly legal document drafting application.
+
+
+2. Provide different document categories.
+
+
+3. Collect information using structured forms.
+
+
+4. Integrate an AI model for draft generation.
+
+
+5. Provide document preview and editing.
+
+
+6. Generate downloadable documents.
+
+
+7. Implement input validation and error handling.
+
+
+8. Protect API credentials and user information.
+
+
+9. Provide appropriate legal-use disclaimers.
+
+
+
+
+---
+
+8. Existing System
+
+In traditional methods, users may:
+
+Search online for templates.
+
+Copy and edit existing documents.
+
+Manually enter information.
+
+Format the document themselves.
+
+Consult professionals for complex documents.
+
+
+Limitations
+
+Time-consuming
+
+Manual formatting
+
+Difficult for beginners
+
+Possibility of incorrect information
+
+Difficulty finding suitable templates
+
+
+
+---
+
+9. Proposed System
+
+LegalEase provides a centralized AI-assisted drafting platform.
+
+Main workflow
+
+Select Document
+      ↓
+Enter Information
+      ↓
+Validate Input
+      ↓
+AI Processing
+      ↓
+Generate Draft
+      ↓
+Preview
+      ↓
+Edit / Regenerate
+      ↓
+Download
+
+
+---
+
+10. System Requirements
+
+Hardware
+
+Computer/laptop
+
+Minimum 4 GB RAM
+
+Recommended 8 GB RAM
+
+Internet connection
+
+Adequate storage
+
+
+Software
+
+Python
+
+Visual Studio Code
+
+HTML/CSS/JavaScript
+
+Flask/FastAPI
+
+AI API
+
+SQLite
+
+Git/GitHub
+
+Modern web browser
+
+
+
+---
+
+11. System Design
+
+The system consists of several major components:
+
+USER
+                   │
+                   ▼
+            ┌───────────────┐
+            │   FRONTEND    │
+            │ HTML/CSS/JS   │
+            └───────┬───────┘
+                    │
+                    ▼
+            ┌───────────────┐
+            │    BACKEND    │
+            │    Python     │
+            └───────┬───────┘
+                    │
+          ┌─────────┴─────────┐
+          ▼                   ▼
+   ┌──────────────┐    ┌──────────────┐
+   │ AI Service   │    │   Database   │
+   │    LLM       │    │   SQLite     │
+   └──────┬───────┘    └──────────────┘
+          │
+          ▼
+   ┌──────────────┐
+   │  Document    │
+   │  Generator   │
+   └──────┬───────┘
+          │
+          ▼
+      PDF/DOCX
+
+
+---
+
+12. Module Documentation
+
+Module 1 – User Interface
+
+Provides:
+
+Home page
+
+Document selection
+
+Input forms
+
+Preview
+
+Download controls
+
+
+Module 2 – Input Validation
+
+Checks:
+
+Required fields
+
+Valid information
+
+Missing information
+
+Invalid formats
+
+
+Module 3 – AI Service
+
+Responsible for:
+
+Preparing prompts
+
+Sending requests
+
+Receiving AI responses
+
+Processing generated content
+
+
+Module 4 – Document Generator
+
+Converts the generated draft into:
+
+PDF
+
+DOCX
+
+TXT
+
+
+depending on the implemented features.
+
+Module 5 – Database
+
+If implemented, manages:
+
+User information
+
+Document metadata
+
+Document history
+
+
+Module 6 – Security
+
+Handles:
+
+API key protection
+
+Input validation
+
+Data protection
+
+Access control where applicable
+
+
+
+---
+
+13. AI Integration Documentation
+
+The AI component is used to convert structured user information into a readable document draft.
+
+Input
+
+Document Type
+User Details
+Purpose
+Terms
+Dates
+Other Information
+
+Processing
+
+User Input
+    ↓
+Prompt Creation
+    ↓
+AI Model
+    ↓
+Generated Content
+
+Output
+
+A structured document draft containing relevant sections based on the selected document type.
+
+The system should instruct the AI to use the information supplied by the user and avoid inventing important facts.
+
+
+---
+
+14. User Manual
+
+Step 1: Open LegalEase
+
+Launch the application using a web browser.
+
+Step 2: Select Document Type
+
+Choose the required document category.
+
+Step 3: Enter Information
+
+Complete the displayed form.
+
+Step 4: Generate
+
+Click the Generate Document button.
+
+Step 5: Review
+
+Read the generated draft carefully.
+
+Step 6: Edit
+
+Modify any information that needs correction.
+
+Step 7: Download
+
+Download the final draft in the available format.
+
+
+---
+
+15. Testing Documentation
+
+The testing report should contain:
+
+Test cases
+
+Expected results
+
+Actual results
+
+Pass/Fail status
+
+Bugs identified
+
+Solutions applied
+
+
+Example
+
+Test Case	Expected Result	Status
+
+Open application	Home page loads	Pass
+Select document	Correct form appears	Pass
+Empty form	Error message appears	Pass
+Generate draft	AI draft appears	Pass
+Edit draft	Changes are applied	Pass
+Download	File is generated	Pass
+
+
+Actual test results should be recorded from the implemented application.
+
+
+---
+
+16. Results
+
+After successful development and testing, LegalEase should be able to:
+
+Accept user information.
+
+Identify the selected document type.
+
+Generate an AI-assisted draft.
+
+Display the draft for review.
+
+Allow editing.
+
+Generate downloadable files.
+
+Handle common errors.
+
+Provide a simple user experience.
+
+
+
+---
+
+17. Advantages
+
+The LegalEase system provides several advantages:
+
+Easy to use
+
+Saves drafting time
+
+Reduces manual formatting
+
+AI-assisted document generation
+
+Structured document output
+
+Easy editing
+
+Convenient downloading
+
+Suitable for basic drafting assistance
+
+Expandable to additional document types
+
+
+
+---
+
+18. Limitations
+
+The project has some limitations:
+
+AI output may occasionally contain errors.
+
+Generated content requires user verification.
+
+Legal requirements vary by jurisdiction.
+
+Internet access may be required for cloud-based AI.
+
+AI API usage may have limitations or costs.
+
+Complex legal matters may require professional legal assistance.
+
+The system cannot guarantee that every generated document is legally valid or suitable for a particular situation.
+
+
+
+---
+
+19. Security and Privacy Documentation
+
+The documentation should explain how security is handled.
+
+Important practices include:
+
+API keys are stored securely.
+
+API keys are not included in frontend code.
+
+.env should be excluded from GitHub.
+
+User information should not be stored unnecessarily.
+
+Appropriate access controls should be used.
+
+Secure communication should be used during deployment.
+
+
+
+---
+
+20. Future Scope
+
+Future versions of LegalEase can include:
+
+Multilingual Support
+
+Generate drafts in multiple languages.
+
+Voice Input
+
+Users can describe their requirements using speech.
+
+User Accounts
+
+Allow users to securely manage their documents.
+
+Document History
+
+Allow users to access previous drafts.
+
+AI Document Explanation
+
+Explain complex sections in simpler language.
+
+More Document Types
+
+Add additional templates and drafting workflows.
+
+Jurisdiction-Specific Support
+
+Provide carefully validated jurisdiction-specific templates and guidance.
+
+Professional Review
+
+Provide an optional workflow for review by qualified legal professionals.
+
+Digital Signatures
+
+Integrate appropriate electronic-signature services where legally suitable.
+
+
+---
+
+21. Conclusion
+
+LegalEase: AI-Powered Legal Document Generator demonstrates how artificial intelligence can be integrated with web technologies to assist users in preparing structured legal document drafts.
+
+The project combines:
+
+Frontend + Backend + AI + Document Generation + Validation
+
+to create a simple workflow:
+
+Select → Enter Details → Generate → Review → Edit → Download
+
+The documentation provides a complete record of the project's development, from the initial idea and requirements through design, implementation, testing, results, limitations, and future improvements.
+
+
+---
+
+22. References
+
+The final report can include references such as:
+
+Official Python documentation
+
+Flask/FastAPI documentation
+
+HTML, CSS and JavaScript documentation
+
+Official AI API documentation
+
+SQLite documentation
+
+Git and GitHub documentation
+
+Documentation for the PDF/DOCX libraries used
+
+
+Only the resources actually used during development should be included in the final reference list.
