@@ -1,1 +1,716 @@
 Project Testing Phase
+LegalEase: AI-Powered Legal Document Generator
+
+Project Testing Phase
+
+1. Introduction
+
+The Project Testing Phase is an important stage in the development of LegalEase: AI-Powered Legal Document Generator. The main purpose of testing is to verify that the application works correctly, produces properly structured document drafts, handles errors, and provides a smooth user experience.
+
+Testing is performed after development to identify and fix problems before the final project demonstration and deployment.
+
+> LegalEase generates AI-assisted drafts. Testing can verify software behavior and output quality, but it cannot guarantee that a generated document is legally suitable for every situation or jurisdiction.
+
+
+
+
+---
+
+2. Objectives of Testing
+
+The main objectives are:
+
+Verify that all features work correctly.
+
+Check whether user input is handled properly.
+
+Test AI document generation.
+
+Check the quality and structure of generated drafts.
+
+Verify document preview and editing.
+
+Test PDF/DOCX/TXT generation.
+
+Identify and fix errors.
+
+Check application usability.
+
+Test security-related functions.
+
+Ensure the complete workflow works correctly.
+
+
+
+---
+
+3. Testing Strategy
+
+The following testing methods can be used:
+
+Unit Testing
+     ↓
+Integration Testing
+     ↓
+System Testing
+     ↓
+User Interface Testing
+     ↓
+AI Output Testing
+     ↓
+Security Testing
+     ↓
+User Acceptance Testing
+
+
+---
+
+4. Unit Testing
+
+Unit testing checks individual components separately.
+
+Components tested
+
+Form validation
+
+Document type selection
+
+AI prompt generation
+
+AI response processing
+
+Document formatting
+
+PDF generation
+
+DOCX generation
+
+Database functions
+
+
+Example
+
+If the user leaves a required field empty:
+
+Input:
+Tenant Name = Empty
+
+Expected:
+"Please enter the tenant name."
+
+If the correct information is entered, the validation should allow the request to continue.
+
+
+---
+
+5. Functional Testing
+
+Functional testing verifies whether each feature performs its intended function.
+
+Feature	Expected Result
+
+Home Page	Opens correctly
+Document Selection	Shows available document types
+Input Form	Accepts user information
+Validation	Detects missing/invalid input
+AI Generation	Produces a structured draft
+Preview	Displays generated content
+Edit	Allows modifications
+Regenerate	Produces updated draft
+Download	Creates the selected file
+Error Handling	Displays useful error messages
+
+
+
+---
+
+6. Document Selection Testing
+
+Different document types are tested to make sure the correct form is displayed.
+
+Example
+
+When the user selects:
+
+Rental Agreement
+
+The system should display fields such as:
+
+Owner name
+
+Tenant name
+
+Property information
+
+Rent
+
+Duration
+
+Start date
+
+
+When the user selects another document type, the relevant fields should change accordingly.
+
+
+---
+
+7. Input Validation Testing
+
+The input form is tested with different types of information.
+
+Test cases
+
+Test 1 – Valid Input
+
+Name: Anu
+Date: 10/10/2026
+Purpose: Authorization
+
+Expected Result:
+The system accepts the information.
+
+Test 2 – Missing Required Field
+
+Name: [Empty]
+
+Expected Result:
+The system displays a validation message.
+
+Test 3 – Invalid Information
+
+The system should identify invalid formats where validation rules apply.
+
+
+---
+
+8. AI Generation Testing
+
+AI generation is one of the most important testing areas.
+
+The system is tested with:
+
+Complete information
+
+Incomplete information
+
+Different document types
+
+Short input
+
+Detailed input
+
+Unusual but valid input
+
+
+Expected result
+
+The AI should:
+
+Generate a structured draft.
+
+Use the information provided by the user.
+
+Maintain relevant details.
+
+Avoid unnecessarily inventing important facts.
+
+Clearly identify missing information when appropriate.
+
+
+
+---
+
+9. AI Output Quality Testing
+
+Generated documents are manually reviewed for:
+
+Correct names
+
+Correct dates
+
+Correct amounts
+
+Proper headings
+
+Logical structure
+
+Readability
+
+Missing sections
+
+Unwanted information
+
+Contradictions
+
+
+Because AI output can vary, important documents should be reviewed by the user and, where appropriate, a qualified legal professional.
+
+
+---
+
+10. Prompt Testing
+
+Different prompts are tested to determine whether the AI produces consistent results.
+
+Example
+
+Basic Prompt:
+
+> Generate a rental agreement.
+
+
+
+Improved Structured Prompt:
+
+> Create a rental agreement draft using only the information provided. Organize the document into appropriate sections and do not invent important missing facts.
+
+
+
+The structured approach should generally produce a more controlled output.
+
+
+---
+
+11. Document Preview Testing
+
+The preview page is tested to ensure:
+
+Complete content is displayed.
+
+Headings are readable.
+
+Paragraphs are correctly formatted.
+
+No content is unnecessarily cut off.
+
+Editing works correctly.
+
+Long documents can be viewed properly.
+
+
+
+---
+
+12. Editing Testing
+
+The editing feature is tested by changing generated information.
+
+Example
+
+Original:
+
+> Monthly Rent: ₹10,000
+
+
+
+After editing:
+
+> Monthly Rent: ₹12,000
+
+
+
+Expected Result:
+The updated information should appear in the final document.
+
+
+---
+
+13. Download Testing
+
+The download feature is tested for supported formats.
+
+PDF
+
+Check:
+
+File creation
+
+Formatting
+
+Text visibility
+
+Page layout
+
+
+DOCX
+
+Check:
+
+File opens correctly
+
+Text is present
+
+Headings and paragraphs are readable
+
+
+TXT
+
+Check:
+
+Complete text is included
+
+File opens without errors
+
+
+
+---
+
+14. Integration Testing
+
+Integration testing checks whether different modules work together.
+
+Example
+
+User Interface
+      ↓
+Input Form
+      ↓
+Backend
+      ↓
+AI API
+      ↓
+Generated Draft
+      ↓
+Document Generator
+      ↓
+Download
+
+Every connection in this workflow is tested.
+
+
+---
+
+15. System Testing
+
+The complete application is tested as one system.
+
+Complete test scenario
+
+1. Open LegalEase.
+
+
+2. Select a document type.
+
+
+3. Enter the required information.
+
+
+4. Submit the form.
+
+
+5. Generate the AI draft.
+
+
+6. View the generated document.
+
+
+7. Edit the document.
+
+
+8. Regenerate if necessary.
+
+
+9. Download the document.
+
+
+10. Open the downloaded file.
+
+
+
+The complete process should work without unexpected errors.
+
+
+---
+
+16. User Interface Testing
+
+The user interface is tested for:
+
+Button functionality
+
+Navigation
+
+Text readability
+
+Form alignment
+
+Responsive design
+
+Mobile compatibility
+
+Desktop compatibility
+
+Error messages
+
+Loading indicators
+
+
+The interface should remain simple enough for users who have limited technical knowledge.
+
+
+---
+
+17. Performance Testing
+
+Performance testing checks how quickly the system responds.
+
+The following are measured:
+
+Page loading time
+
+Form submission time
+
+AI response time
+
+Document-generation time
+
+Download time
+
+
+The application should provide a loading indicator during longer AI operations so users understand that processing is taking place.
+
+
+---
+
+18. Security Testing
+
+Security testing focuses on protecting user information and application credentials.
+
+Tests include:
+
+Checking that API keys are not exposed in frontend code.
+
+Testing input validation.
+
+Checking unauthorized access.
+
+Checking file access controls where applicable.
+
+Ensuring sensitive information is not unnecessarily stored.
+
+Checking secure communication during deployment.
+
+
+The .env file containing API credentials should not be uploaded to GitHub.
+
+
+---
+
+19. Error Handling Testing
+
+The system is intentionally tested with incorrect conditions.
+
+AI API unavailable
+
+Expected:
+
+> Unable to generate the document. Please try again later.
+
+
+
+Missing information
+
+Expected:
+
+> Please complete all required fields.
+
+
+
+Network failure
+
+Expected:
+
+> Connection error. Please check your internet connection.
+
+
+
+Document-generation failure
+
+Expected:
+
+> Unable to create the document. Please try again.
+
+
+
+These messages should be clear and understandable.
+
+
+---
+
+20. Compatibility Testing
+
+LegalEase can be tested on:
+
+Browsers
+
+Google Chrome
+
+Microsoft Edge
+
+Mozilla Firefox
+
+
+Devices
+
+Desktop
+
+Laptop
+
+Tablet
+
+Smartphone
+
+
+The goal is to ensure that the basic functionality remains available across commonly used devices and browsers.
+
+
+---
+
+21. User Acceptance Testing
+
+A small group of users can test LegalEase and provide feedback.
+
+They can evaluate:
+
+Ease of use
+
+Interface design
+
+Document-generation process
+
+AI output readability
+
+Editing functionality
+
+Download functionality
+
+Overall experience
+
+
+Feedback can then be used to improve the application.
+
+
+---
+
+22. Sample Test Cases
+
+Test ID	Test Case	Expected Result	Status
+
+TC01	Open website	Home page appears	Pass
+TC02	Select document	Correct form appears	Pass
+TC03	Submit empty form	Validation message appears	Pass
+TC04	Enter valid data	Data accepted	Pass
+TC05	Generate document	AI draft generated	Pass
+TC06	Preview document	Draft displayed correctly	Pass
+TC07	Edit draft	Changes saved/displayed	Pass
+TC08	Download PDF	PDF generated	Pass
+TC09	API failure	Error message shown	Pass
+TC10	Mobile test	Interface adapts correctly	Pass
+
+
+The status column should be updated with the actual results obtained during testing.
+
+
+---
+
+23. Bug Identification and Fixing
+
+During testing, any problems found are recorded.
+
+Example bug report
+
+Bug	Cause	Solution
+
+Generate button not working	Backend route error	Corrected route
+PDF formatting incorrect	Template issue	Updated PDF formatting
+Missing-field error not displayed	Validation problem	Added validation
+AI output contains unwanted text	Prompt issue	Improved prompt
+Mobile layout broken	CSS issue	Updated responsive CSS
+
+
+After fixing each bug, the relevant test is repeated.
+
+
+---
+
+24. Regression Testing
+
+After fixing bugs, previously working features are tested again.
+
+For example:
+
+Fix AI Generation
+       ↓
+Test AI Generation
+       ↓
+Retest Preview
+       ↓
+Retest Editing
+       ↓
+Retest Download
+
+This ensures that a new change has not broken an existing feature.
+
+
+---
+
+25. Testing Results
+
+After successful testing, LegalEase should demonstrate:
+
+Correct navigation.
+
+Successful document selection.
+
+Proper input validation.
+
+Successful AI-assisted draft generation.
+
+Correct document preview.
+
+Functional editing.
+
+Successful document export.
+
+Proper error handling.
+
+Acceptable performance.
+
+Appropriate security practices.
+
+
+
+---
+
+26. Testing Checklist
+
+☑ Home page tested
+☑ Document selection tested
+☑ Input forms tested
+☑ Validation tested
+☑ AI integration tested
+☑ AI output reviewed
+☑ Preview tested
+☑ Editing tested
+☑ Regeneration tested
+☑ PDF/DOCX/TXT tested
+☑ Error handling tested
+☑ Security tested
+☑ Browser compatibility tested
+☑ Mobile responsiveness tested
+☑ User acceptance tested
+☑ Bugs fixed
+☑ Regression testing completed
+
+
+---
+
+27. Conclusion
+
+The Project Testing Phase ensures that LegalEase: AI-Powered Legal Document Generator is functional, reliable, user-friendly, and ready for demonstration.
+
+Testing covers the complete workflow:
+
+User Input → Validation → AI Processing → Draft Generation → Preview → Editing → Download
+
+After identifying and fixing bugs, the final application can proceed to the Project Documentation Phase, followed by the Project Demonstration Phase.
