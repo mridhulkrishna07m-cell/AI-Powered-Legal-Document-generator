@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>LegalEase - AI Legal Document Generator</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f7fb;
+    color: #222;
+}
+
+header {
+    background: linear-gradient(135deg, #182848, #4b6cb7);
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+header p {
+    font-size: 15px;
+    opacity: 0.9;
+}
+
+.container {
+    width: 92%;
+    max-width: 1100px;
+    margin: 30px auto;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.card h2 {
+    margin-bottom: 20px;
+    color: #182848;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 7px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+button {
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    margin-top: 20px;
+}
+
+.generate-btn {
+    background: #182848;
+    color: white;
+    width: 100%;
+}
+
+.generate-btn:hover {
+    background: #4b6cb7;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.action-buttons button {
+    color: white;
+}
+
+.print-btn {
+    background: #198754;
+}
+
+.clear-btn {
+    background: #dc3545;
+}
+
+.copy-btn {
+    background: #6f42c1;
+}
+
+.document {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 40px;
+    min-height: 500px;
+    line-height: 1.8;
+    white-space: pre-wrap;
+}
+
+.document h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #182848;
+}
+
+.hidden {
+    display: none;
+}
+
+.badge {
+    display: inline-block;
+    background: #e8eefc;
+    color: #182848;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #666;
+    font-size: 13px;
+}
+
+.ai-box {
+    background: #eef4ff;
+    border-left: 5px solid #4b6cb7;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+@media(max-width:600px) {
+    .document {
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 25px;
+    }
+}
+
+@media print {
+    header,
+    .input-section,
+    .action-buttons,
+    footer {
+        display: none;
+    }
+
+    body {
+        background: white;
+    }
+
+    .container {
+        width: 100%;
+        margin: 0;
+    }
+
+    .card {
+        box-shadow: none;
+        border: none;
+    }
+
+    .document {
+        border: none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>⚖️ LegalEase</h1>
+    <p>AI-Powered Legal Document Generator</p>
+</header>
+
+<div class="container">
+
+    <!-- INPUT SECTION -->
+    <div class="card input-section">
+
+        <span class="badge">AI Document Assistant</span>
+
+        <h2>Create Your Legal Document</h2>
+
+        <div class="ai-box">
+            Enter the required information below. LegalEase will automatically
+            organize the information into a structured document draft.
+        </div>
+
+        <label>Document Type</label>
+
+        <select id="documentType" onchange="changeForm()">
+            <option value="rental">Rental Agreement</option>
+            <option value="affidavit">Affidavit</option>
+            <option value="authorization">Authorization Letter</option>
+            <option value="declaration">Declaration</option>
+            <option value="legalnotice">Legal Notice</option>
+            <option value="employment">Employment Agreement</option>
+        </select>
+
+        <div id="formFields"></div>
+
+        <button class="generate-btn" onclick="generateDocument()">
+            🤖 Generate Legal Document
+        </button>
+
+    </div>
+
+
+    <!-- OUTPUT SECTION -->
+
+    <div class="card">
+
+        <h2>Generated Document</h2>
+
+        <div id="documentOutput" class="document">
+            Your generated document will appear here.
+        </div>
+
+        <div class="action-buttons">
+
+            <button class="print-btn" onclick="printDocument()">
+                🖨️ Print / Save PDF
+            </button>
+
+            <button class="copy-btn" onclick="copyDocument()">
+                📋 Copy
+            </button>
+
+            <button class="clear-btn" onclick="clearDocument()">
+                🗑️ Clear
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 LegalEase | AI-Powered Legal Document Generator
+    <br>
+    This application provides document drafts for informational purposes and
+    does not replace professional legal advice.
+</footer>
+
+
+<script>
+
+let currentForm = "rental";
+
+
+/* ------------------------------
+   FORM GENERATION
+------------------------------ */
+
+function changeForm() {
+
+    currentForm = document.getElementById("documentType").value;
+
+    let html = "";
+
+    if(currentForm === "rental") {
+
+        html = `
+            <label>Landlord Name</label>
+            <input id="landlord" placeholder="Enter landlord name">
+
+            <label>Tenant Name</label>
+            <input id="tenant" placeholder="Enter tenant name">
+
+            <label>Property Address</label>
+            <textarea id="property" placeholder="Enter property address"></textarea>
+
+            <label>Monthly Rent</label>
+            <input id="rent" placeholder="Example: ₹15,000">
+
+            <label>Security Deposit</label>
+            <input id="deposit" placeholder="Example: ₹30,000">
+
+            <label>Agreement Duration</label>
+            <input id="duration" placeholder="Example: 11 months">
+
+            <label>Start Date</label>
+            <input type="date" id="startDate">
+        `;
+    }
+
+    else if(currentForm === "affidavit") {
+
+        html = `
+            <label>Deponent Name</label>
+            <input id="deponent" placeholder="Enter full name">
+
+            <label>Age</label>
+            <input id="age" type="number" placeholder="Enter age">
+
+            <label>Address</label>
+            <textarea id="address" placeholder="Enter address"></textarea>
+
+            <label>Purpose of Affidavit</label>
+            <textarea id="purpose" placeholder="Enter purpose"></textarea>
+
+            <label>Date</label>
+            <input type="date" id="date">
+        `;
+    }
+
+    else if(currentForm === "authorization") {
+
+        html = `
+            <label>Authorizing Person</label>
+            <input id="authorizer" placeholder="Enter name">
+
+            <label>Authorized Person</label>
+            <input id="authorized" placeholder="Enter name">
+
+            <label>Purpose</label>
+            <textarea id="authPurpose" placeholder="Enter purpose of authorization"></textarea>
+
+            <label>Address</label>
+            <textarea id="authAddress" placeholder="Enter address"></textarea>
+
+            <label>Date</label>
+            <input type="date" id="authDate">
+        `;
+    }
+
+    else if(currentForm === "declaration") {
+
+        html = `
+            <label>Declarant Name</label>
+            <input id="declarant" placeholder="Enter name">
+
+            <label>Address</label>
+            <textarea id="decAddress" placeholder="Enter address"></textarea>
+
+            <label>Declaration Statement</label>
+            <textarea id="statement" placeholder="Enter declaration"></textarea>
+
+            <label>Date</label>
+            <input type="date" id="decDate">
+        `;
+    }
+
+    else if(currentForm === "legalnotice") {
+
+        html = `
+            <label>Sender Name</label>
+            <input id="sender" placeholder="Enter sender name">
+
+            <label>Recipient Name</label>
+            <input id="recipient" placeholder="Enter recipient name">
+
+            <label>Recipient Address</label>
+            <textarea id="recipientAddress" placeholder="Enter address"></textarea>
+
+            <label>Subject</label>
+            <input id="subject" placeholder="Enter subject">
+
+            <label>Notice Details</label>
+            <textarea id="noticeDetails" placeholder="Enter details"></textarea>
+
+            <label>Date</label>
+            <input type="date" id="noticeDate">
+        `;
+    }
+
+    else if(currentForm === "employment") {
+
+        html = `
+            <label>Employer Name</label>
+            <input id="employer" placeholder="Enter employer name">
+
+            <label>Employee Name</label>
+            <input id="employee" placeholder="Enter employee name">
+
+            <label>Job Position</label>
+            <input id="position" placeholder="Example: Software Developer">
+
+            <label>Salary</label>
+            <input id="salary" placeholder="Example: ₹30,000 per month">
+
+            <label>Work Location</label>
+            <input id="workLocation" placeholder="Enter location">
+
+            <label>Employment Start Date</label>
+            <input type="date" id="employmentDate">
+        `;
+    }
+
+    document.getElementById("formFields").innerHTML = html;
+}
+
+
+/* ------------------------------
+   GET VALUE FUNCTION
+------------------------------ */
+
+function value(id) {
+
+    let element = document.getElementById(id);
+
+    if(!element) return "";
+
+    return element.value.trim();
+}
+
+
+/* ------------------------------
+   GENERATE DOCUMENT
+------------------------------ */
+
+function generateDocument() {
+
+    let output = "";
+
+    if(currentForm === "rental") {
+
+        output = `
+RENTAL AGREEMENT
+
+This Rental Agreement is made between ${value("landlord")} (hereinafter referred to as the "Landlord") and ${value("tenant")} (hereinafter referred to as the "Tenant").
+
+1. PROPERTY
+
+The Landlord agrees to rent the property located at:
+
+${value("property")}
+
+2. RENT
+
+The Tenant agrees to pay a monthly rent of ${value("rent")}.
+
+3. SECURITY DEPOSIT
+
+The Tenant shall provide a security deposit of ${value("deposit")}.
+
+4. DURATION
+
+The duration of this agreement shall be ${value("duration")} starting from ${value("startDate")}.
+
+5. RESPONSIBILITIES
+
+Both parties agree to maintain the property properly and comply with the agreed terms.
+
+6. TERMINATION
+
+Either party may terminate the agreement according to the applicable terms and legal requirements.
+
+7. DECLARATION
+
+Both parties confirm that they have read and understood the terms of this agreement.
+
+Landlord Signature: ____________________
+
+Tenant Signature: ______________________
+
+Date: _________________________________
+`;
+    }
+
+
+    else if(currentForm === "affidavit") {
+
+        output = `
+AFFIDAVIT
+
+I, ${value("deponent")}, aged ${value("age")} years, residing at:
+
+${value("address")}
+
+do hereby solemnly affirm and declare as follows:
+
+1. That I am the person making this affidavit.
+
+2. That this affidavit is made for the following purpose:
+
+${value("purpose")}
+
+3. That the information provided by me is true and correct to the best of my knowledge and belief.
+
+4. That I understand the importance of providing accurate information.
+
+DECLARANT
+
+Name: ${value("deponent")}
+
+Signature: __________________________
+
+Date: ${value("date")}
+`;
+    }
+
+
+    else if(currentForm === "authorization") {
+
+        output = `
+AUTHORIZATION LETTER
+
+Date: ${value("authDate")}
+
+To Whom It May Concern,
+
+I, ${value("authorizer")}, hereby authorize ${value("authorized")} to act on my behalf for the following purpose:
+
+${value("authPurpose")}
+
+Address of the authorizing person:
+
+${value("authAddress")}
+
+This authorization is provided voluntarily for the purpose stated above.
+
+Authorizing Person:
+
+Name: ${value("authorizer")}
+
+Signature: __________________________
+
+Authorized Person:
+
+Name: ${value("authorized")}
+
+Signature: __________________________
+`;
+    }
+
+
+    else if(currentForm === "declaration") {
+
+        output = `
+DECLARATION
+
+I, ${value("declarant")}, residing at:
+
+${value("decAddress")}
+
+hereby declare that:
+
+${value("statement")}
+
+I confirm that the above information is true and correct to the best of my knowledge and belief.
+
+I understand that providing false information may have legal consequences under applicable law.
+
+Declarant Name: ${value("declarant")}
+
+Signature: __________________________
+
+Date: ${value("decDate")}
+`;
+    }
+
+
+    else if(currentForm === "legalnotice") {
+
+        output = `
+LEGAL NOTICE
+
+Date: ${value("noticeDate")}
+
+To,
+
+${value("recipient")}
+
+Address:
+
+${value("recipientAddress")}
+
+Subject: ${value("subject")}
+
+Dear Sir/Madam,
+
+I, ${value("sender")}, hereby issue this notice regarding the following matter:
+
+${value("noticeDetails")}
+
+You are requested to take appropriate action regarding the matter described above.
+
+This document is generated as a preliminary legal notice draft and should be reviewed by a qualified legal professional before formal use.
+
+Sincerely,
+
+${value("sender")}
+
+Signature: __________________________
+`;
+    }
+
+
+    else if(currentForm === "employment") {
+
+        output = `
+EMPLOYMENT AGREEMENT
+
+This Employment Agreement is entered into between:
+
+Employer: ${value("employer")}
+
+and
+
+Employee: ${value("employee")}
+
+1. POSITION
+
+The employee will work as a ${value("position")}.
+
+2. SALARY
+
+The agreed salary is ${value("salary")}.
+
+3. WORK LOCATION
+
+The primary work location will be ${value("workLocation")}.
+
+4. COMMENCEMENT
+
+Employment will begin on ${value("employmentDate")}.
+
+5. RESPONSIBILITIES
+
+The employee agrees to perform the duties associated with the assigned position responsibly and professionally.
+
+6. CONFIDENTIALITY
+
+The employee agrees to maintain confidentiality regarding confidential information obtained during employment.
+
+7. GENERAL TERMS
+
+Both parties agree to comply with applicable employment laws and the agreed terms.
+
+Employer Signature: ____________________
+
+Employee Signature: _____________________
+
+Date: _________________________________
+`;
+    }
+
+
+    document.getElementById("documentOutput").textContent = output.trim();
+
+}
+
+
+/* ------------------------------
+   PRINT
+------------------------------ */
+
+function printDocument() {
+
+    let content =
+        document.getElementById("documentOutput").innerText;
+
+    if(content === "Your generated document will appear here.") {
+
+        alert("Please generate a document first.");
+
+        return;
+    }
+
+    window.print();
+}
+
+
+/* ------------------------------
+   COPY
+------------------------------ */
+
+function copyDocument() {
+
+    let content =
+        document.getElementById("documentOutput").innerText;
+
+    navigator.clipboard.writeText(content);
+
+    alert("Document copied successfully!");
+}
+
+
+/* ------------------------------
+   CLEAR
+------------------------------ */
+
+function clearDocument() {
+
+    document.getElementById("documentOutput").textContent =
+        "Your generated document will appear here.";
+
+}
+
+
+/* ------------------------------
+   INITIAL FORM
+------------------------------ */
+
+changeForm();
+
+</script>
+
+</body>
+</html>
