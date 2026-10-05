@@ -1,1 +1,668 @@
 Project Design Phase Phase
+LegalEase: AI-Powered Legal Document Generator
+
+Project Design Phase
+
+1. Introduction
+
+The Project Design Phase converts the requirements identified in the Requirement Analysis Phase into a detailed technical design.
+
+For LegalEase, the design focuses on creating a simple, user-friendly, and secure web application that allows users to select a document type, enter relevant information, generate an AI-assisted legal document draft, review it, edit it, and download the final draft.
+
+> LegalEase is designed for AI-assisted document drafting, not as a replacement for professional legal advice.
+
+
+
+
+---
+
+2. Design Objectives
+
+The main objectives of the design are:
+
+Create a simple and attractive user interface.
+
+Make document generation easy for non-technical users.
+
+Connect the application with an AI service.
+
+Organize user information systematically.
+
+Generate structured document drafts.
+
+Provide document preview and editing.
+
+Support document downloading.
+
+Protect user information and API credentials.
+
+Make the application easy to maintain and expand.
+
+
+
+---
+
+3. System Architecture
+
+LegalEase can use a three-layer architecture.
+
+┌───────────────────────┐
+              │        USER           │
+              └───────────┬───────────┘
+                          │
+                          ▼
+              ┌───────────────────────┐
+              │    FRONTEND / UI      │
+              │ HTML + CSS + JS       │
+              └───────────┬───────────┘
+                          │
+                          ▼
+              ┌───────────────────────┐
+              │      BACKEND          │
+              │ Python + Flask        │
+              └───────────┬───────────┘
+                          │
+              ┌───────────┴───────────┐
+              ▼                       ▼
+    ┌──────────────────┐    ┌──────────────────┐
+    │   AI SERVICE     │    │    DATABASE      │
+    │  Gemini / LLM    │    │ SQLite / MySQL   │
+    └──────────────────┘    └──────────────────┘
+                          │
+                          ▼
+              ┌───────────────────────┐
+              │ DOCUMENT GENERATOR    │
+              │ PDF / DOCX / TXT      │
+              └───────────────────────┘
+
+
+---
+
+4. Frontend Design
+
+The frontend is the part of LegalEase that users interact with.
+
+Technologies
+
+HTML
+
+CSS
+
+JavaScript
+
+Bootstrap or custom CSS, if required
+
+
+Main frontend pages
+
+4.1 Home Page
+
+The home page contains:
+
+LegalEase logo/name
+
+Project introduction
+
+Short description
+
+Create Document button
+
+Available document categories
+
+Legal disclaimer
+
+
+Example:
+
+> LegalEase
+AI-Powered Legal Document Generator
+Create structured document drafts easily with AI assistance.
+
+
+
+
+---
+
+4.2 Document Selection Page
+
+Users can choose the type of document they want to create.
+
+Example cards:
+
+┌─────────────────┐
+│ Rental Agreement│
+│     Draft       │
+└─────────────────┘
+
+┌─────────────────┐
+│ Authorization   │
+│     Letter      │
+└─────────────────┘
+
+┌─────────────────┐
+│   Declaration   │
+│      Draft      │
+└─────────────────┘
+
+
+---
+
+4.3 Information Form
+
+After selecting a document type, the application displays relevant fields.
+
+For example:
+
+Rental Agreement
+
+Owner Name
+
+Tenant Name
+
+Property Address
+
+Monthly Rent
+
+Agreement Duration
+
+Start Date
+
+Additional Conditions
+
+
+The fields can change according to the selected document type.
+
+
+---
+
+5. Backend Design
+
+The backend manages the application's main processing.
+
+Possible technology
+
+Python + Flask
+
+The backend will:
+
+1. Receive user input.
+
+
+2. Validate the input.
+
+
+3. Identify the document type.
+
+
+4. Create an AI prompt.
+
+
+5. Send the request to the AI service.
+
+
+6. Receive the generated draft.
+
+
+7. Return the result to the frontend.
+
+
+8. Generate downloadable files.
+
+
+
+
+---
+
+6. AI Processing Design
+
+The AI module is the central component of LegalEase.
+
+Processing flow
+
+User Information
+       ↓
+Input Validation
+       ↓
+Document Type Identification
+       ↓
+Prompt Creation
+       ↓
+AI Model
+       ↓
+Generated Draft
+       ↓
+Validation / Formatting
+       ↓
+Document Preview
+
+The AI prompt should contain:
+
+Selected document type
+
+User-provided information
+
+Required document structure
+
+Instructions to avoid inventing missing facts
+
+Instructions to produce draft content clearly
+
+
+
+---
+
+7. Prompt Design
+
+A structured prompt can be used to obtain consistent results.
+
+Example concept
+
+Document Type:
+Rental Agreement
+
+User Information:
+Owner: ______
+Tenant: ______
+Property: ______
+Rent: ______
+Duration: ______
+
+Instructions:
+Create a clearly structured draft using only the
+information provided. Do not invent important facts.
+Clearly identify missing information where necessary.
+
+This approach helps the AI generate more consistent drafts.
+
+
+---
+
+8. Database Design
+
+If database functionality is included, the system can use SQLite for a simple student project.
+
+Possible tables
+
+Users
+
+Field	Description
+
+user_id	Unique user ID
+name	User name
+email	User email
+created_at	Account creation date
+
+
+Documents
+
+Field	Description
+
+document_id	Unique document ID
+user_id	Associated user
+document_type	Type of document
+content	Generated draft
+created_at	Creation date
+
+
+The database design can be expanded if user accounts and document history are implemented.
+
+
+---
+
+9. Document Generation Design
+
+After the AI generates the draft, LegalEase can convert it into a downloadable document.
+
+Supported formats
+
+PDF
+
+DOCX
+
+TXT
+
+
+Process
+
+AI Generated Content
+        ↓
+Formatting
+        ↓
+Document Template
+        ↓
+File Generation
+        ↓
+Download
+
+The document should contain:
+
+Title
+
+Relevant sections
+
+User-provided information
+
+Terms and conditions where appropriate
+
+Date
+
+Signature placeholders
+
+Disclaimer where appropriate
+
+
+
+---
+
+10. User Workflow Design
+
+The complete user journey is:
+
+START
+  ↓
+Open LegalEase
+  ↓
+Select Document Type
+  ↓
+Enter Information
+  ↓
+Validate Input
+  ↓
+Generate Draft
+  ↓
+AI Processing
+  ↓
+Preview Document
+  ↓
+Edit?
+ ┌───────┴───────┐
+Yes              No
+ ↓                ↓
+Edit          Download
+ ↓                ↓
+Regenerate       END
+
+
+---
+
+11. User Interface Design
+
+The interface should have a clean and modern appearance.
+
+Suggested sections
+
+Header
+
+LegalEase
+
+Home
+
+Create Document
+
+About
+
+
+Main Area
+
+Document cards
+
+Forms
+
+AI generation button
+
+Preview
+
+
+Footer
+
+About LegalEase
+
+Privacy information
+
+Disclaimer
+
+
+Design principles
+
+Simple navigation
+
+Clear buttons
+
+Readable fonts
+
+Responsive layout
+
+Proper spacing
+
+Clear error messages
+
+Mobile-friendly design
+
+
+
+---
+
+12. Security Design
+
+Security is important because users may provide personal information.
+
+The system should:
+
+Store API keys in environment variables.
+
+Never expose API keys in JavaScript/frontend code.
+
+Validate user input.
+
+Use HTTPS when deployed.
+
+Avoid unnecessary storage of sensitive information.
+
+Restrict access to stored documents.
+
+Provide appropriate privacy information.
+
+
+
+---
+
+13. Error Handling Design
+
+The application should handle errors gracefully.
+
+Example
+
+If the AI service fails:
+
+Unable to generate the document.
+Please check your connection and try again.
+
+If required information is missing:
+
+Please enter the required information before
+generating the document.
+
+If an invalid value is entered:
+
+Please enter valid information.
+
+
+---
+
+14. Legal Disclaimer Design
+
+A disclaimer should be visible in the application.
+
+Example:
+
+> Disclaimer: LegalEase provides AI-assisted document drafts for informational and drafting purposes. Generated content may require verification and customization. It does not constitute legal advice or create an attorney-client relationship. Consult a qualified legal professional for important or complex legal matters.
+
+
+
+
+---
+
+15. Proposed Project Structure
+
+A possible project structure is:
+
+LegalEase/
+│
+├── app.py
+├── requirements.txt
+├── .env
+│
+├── templates/
+│   ├── index.html
+│   ├── documents.html
+│   ├── form.html
+│   └── preview.html
+│
+├── static/
+│   ├── css/
+│   │   └── style.css
+│   └── js/
+│       └── script.js
+│
+├── services/
+│   ├── ai_service.py
+│   └── document_generator.py
+│
+├── database/
+│   └── database.py
+│
+└── generated_documents/
+
+This modular structure makes the project easier to develop and maintain.
+
+
+---
+
+16. Module Design
+
+Module 1 – User Interface
+
+Responsible for displaying pages and collecting information.
+
+Module 2 – Document Selection
+
+Handles available document categories.
+
+Module 3 – Input Validation
+
+Checks whether required information is provided correctly.
+
+Module 4 – AI Service
+
+Communicates with the selected AI model.
+
+Module 5 – Document Generator
+
+Converts generated content into downloadable formats.
+
+Module 6 – Database
+
+Stores necessary document and user information if enabled.
+
+Module 7 – Security
+
+Handles API keys, authentication, and data protection.
+
+
+---
+
+17. Data Flow Diagram
+
+USER
+                │
+                ▼
+        ┌───────────────┐
+        │ Select Type   │
+        └───────┬───────┘
+                │
+                ▼
+        ┌───────────────┐
+        │ Enter Details │
+        └───────┬───────┘
+                │
+                ▼
+        ┌───────────────┐
+        │ Validation    │
+        └───────┬───────┘
+                │
+                ▼
+        ┌───────────────┐
+        │ AI Processing │
+        └───────┬───────┘
+                │
+                ▼
+        ┌───────────────┐
+        │ Draft Output  │
+        └───────┬───────┘
+                │
+        ┌───────┴────────┐
+        ▼                ▼
+      EDIT            DOWNLOAD
+
+
+---
+
+18. Design Considerations
+
+During the design phase, the following points should be considered:
+
+AI-generated content must be reviewable.
+
+Missing information should be clearly identified.
+
+The system should not fabricate legal facts.
+
+Different document types require different input fields.
+
+User data should be handled securely.
+
+The application should remain simple enough for beginners.
+
+The architecture should allow additional AI/document features later.
+
+
+
+---
+
+19. Expected Design Output
+
+At the end of the Design Phase, the project should have:
+
+System architecture
+
+UI design
+
+Database design
+
+AI processing workflow
+
+Document-generation workflow
+
+Module structure
+
+Data flow
+
+Security design
+
+Project folder structure
+
+Technology stack
+
+
+
+---
+
+20. Conclusion
+
+The Project Design Phase provides the technical blueprint for LegalEase: AI-Powered Legal Document Generator. It defines how the frontend, backend, AI service, database, and document-generation modules will communicate with each other.
+
+The final design follows a simple process:
+
+Select Document → Enter Details → Validate → AI Generation → Review/Edit → Download
+
+This design provides the foundation for the next stage, the Project Development Phase, where the actual LegalEase application will be implemented.
